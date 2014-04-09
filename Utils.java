@@ -128,7 +128,50 @@ public class Utils {
 		
 	} // end insertionSort() method
         
-        
+/** maxHeapify()
+**
+** @param list
+** @throws OutOfBoundsException
+**
+** Constructs a heap with a max value priority queue / tree
+** 
+**/
+public static void maxHeapify( List list ) throws OutOfBoundsException {
+	
+	for ( int i = Math.floor( (double) ( n -2 ) / 2 ); i >= 0; i-- ) {
+		
+		int k = i;
+		int v = list[ k ];
+		boolean heap = false;
+		
+		while ( !heap && ( 2 * k + 2 ) <= n ) {
+			
+			int j = 2 * k + 1;
+			if j + 1 < n {
+				
+				if list[ j ] < list[ j + 1] {
+					
+					j++;
+					
+				} else if ( v >= list[ j ] ) {
+					
+					heap = true;
+					
+				} else {
+					
+					list[ k ] = list[ j ];
+					k = j;
+					
+				}
+				
+			}
+			list[ k ] = v;
+			
+		}
+		
+		
+	}	
+}
         
         
 
