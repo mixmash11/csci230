@@ -28,7 +28,8 @@ public class SLList implements List {
 
             head = new Node( null , data );
 
-        } else {
+        }
+        else {
 
             try {
 
@@ -80,7 +81,8 @@ public class SLList implements List {
 
             return node;
 
-        } else {
+        }
+        else {
 
             String message = String.format( "index (%d) >= size (%d) (OR < 0) of list\n" , index , size );
 
@@ -113,6 +115,7 @@ public class SLList implements List {
      * Remove the last node from the singly linked list
      *
      */
+    @Override
     public void remove() {
 
         if ( size() > 1 ) {
@@ -132,7 +135,8 @@ public class SLList implements List {
 
             }
 
-        } else if ( size() == 1 ) {
+        }
+        else if ( size() == 1 ) {
 
             head = null;
             size --;
@@ -194,12 +198,14 @@ public class SLList implements List {
 
                 remove();
 
-            } else if ( index == 0 ) {
+            }
+            else if ( index == 0 ) {
 
                 head = retrieve( 1 );
                 size --;
 
-            } else {
+            }
+            else {
 
                 Node prevNode = retrieve( index - 1 );
                 Node current = retrieve( index );
@@ -209,7 +215,8 @@ public class SLList implements List {
 
             }
 
-        } else {
+        }
+        else {
 
             String message = String.format( "index (%d) >= size (%d) (OR < 0) of list\n" , index , size );
 
@@ -236,13 +243,15 @@ public class SLList implements List {
 
                 add( data );
 
-            } else if ( index == 0 ) {
+            }
+            else if ( index == 0 ) {
 
                 Node next = head;
                 head = new Node( next , data );
                 size ++;
 
-            } else {
+            }
+            else {
 
                 Node prev = retrieve( index - 1 );
                 Node next = retrieve( index );
@@ -253,7 +262,8 @@ public class SLList implements List {
 
             }
 
-        } else {
+        }
+        else {
 
             String message = String.format( "index (%d) >= (OR < 0) size (%d) of list\n" , index , size );
 
@@ -289,7 +299,8 @@ public class SLList implements List {
             retrieve( node1 ).setData( retrieve( node2 ).getData() );
             retrieve( node2 ).setData( temp );
 
-        } else {
+        }
+        else {
             String message = String.format( "indices (%d & %d) >= (OR < 0) size (%d) of list\n" , node1 , node2 , size );
 
             throw new OutOfBoundsException( message );
