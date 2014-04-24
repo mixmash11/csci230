@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package edu.cofc.compsci.csci230;
 
@@ -49,7 +45,7 @@ public class ClosedHashing {
                 hash_array[hash_Value].setVisited( 1 );
 
                 // To check if a spot is empty, the program verfies there is either a null value or a lazy deletion node in the slot.
-                if ( hash_array[    ++ slotNum] == null || hash_array[ slotNum].equals( lazyD ) ) {
+                if ( hash_array[   ++ slotNum] == null || hash_array[ slotNum].equals( lazyD ) ) {
                     empty = true;
                 }
                 if ( slotNum >= ( hash_array.length - 1 ) ) {
@@ -81,6 +77,7 @@ public class ClosedHashing {
         if (  ! hash_array[hashValue].hasBeenVisited() ) {
             hash_array[hashValue] = null;
         }
+        // Otherwise, put a lazy deletion node in the spot.
         else {
             hash_array[hashValue] = lazyD;
         }
