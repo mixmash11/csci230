@@ -45,6 +45,23 @@ public class Node {
 
     private List collisionList = new SLList();
 
+    /**
+     *
+     * @param next
+     * @param data
+     */
+    public Node( Node next , int data ) {
+
+        this.next = next;
+        this.data = data;
+
+    }
+
+    public Node( String string ) {
+        this.keyValue = string;
+    }
+
+    // end overloaded constructor
     public void setKeyValue( String keyValue ) {
         this.keyValue = keyValue;
     }
@@ -90,18 +107,6 @@ public class Node {
         }
         return hasList;
     }
-
-    /**
-     *
-     * @param next
-     * @param data
-     */
-    public Node( Node next , int data ) {
-
-        this.next = next;
-        this.data = data;
-
-    } // end overloaded constructor
 
     /**
      *

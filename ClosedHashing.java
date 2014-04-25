@@ -16,8 +16,26 @@ public class ClosedHashing {
     // A lazy deletion node.
     private Node lazyD = new Node( null , -1 );
 
+    // A constructor
+    public ClosedHashing() {
+    }
+
+    // A constructor that sets a new hash key
+    public ClosedHashing( int newKey ) {
+        this.hash_Key = newKey;
+        hash_array = new Node[ hash_Key ];
+    }
+
+    public int getHash_Key() {
+        return hash_Key;
+    }
+
+    public void setHash_Key( int hash_Key ) {
+        this.hash_Key = hash_Key;
+    }
+
     // This method hashes the data in a given node then puts it in the hash array.
-    public void add( Node node ) {
+    public void add( Node node ) throws OutOfBoundsException {
 
         // The following lines compute a sum of the character values of the string.
         int sum = 0;
@@ -29,6 +47,8 @@ public class ClosedHashing {
         // The computed sum is then modulo'd by the hash key for the hash val.
         int hash_Value = sum % hash_Key;
         node.setHashValue( hash_Value );
+
+        //System.out.print(hash_Value + "\n");
 
         // If the hash value spot is unoccupied, insert the node there
         if ( hash_array[hash_Value] == null ) {
@@ -42,20 +62,38 @@ public class ClosedHashing {
             boolean empty = false;
             int slotNum = hash_Value;
             while (  ! empty ) {
+                slotNum ++;
+
+                if ( slotNum >= ( hash_array.length ) ) {
+                    slotNum = 0;
+                }
+
                 hash_array[hash_Value].setVisited( 1 );
 
+
+                //Increments the value we are looking at
+
+                if ( slotNum == hash_array.length ) {
+                    slotNum = 0;
+                }
+                if ( slotNum == hash_Value ) {
+                    System.out.print( "\nArray is full" );
+                }
+
+
                 // To check if a spot is empty, the program verfies there is either a null value or a lazy deletion node in the slot.
-                if ( hash_array[   ++ slotNum] == null || hash_array[ slotNum].equals( lazyD ) ) {
+                if ( ( hash_array[ slotNum] == null ) || ( hash_array[ slotNum].equals( lazyD ) ) ) {
                     empty = true;
                 }
-                if ( slotNum >= ( hash_array.length - 1 ) ) {
-                    slotNum = -1;
-                }
+
+
+
             }
             hash_array[slotNum] = node;
 
         }
 
+        //System.out.print("Added");
     }
 
     // This method retrieves a node by its hash value
@@ -70,17 +108,40 @@ public class ClosedHashing {
         return hash_array[slotNum];
     }
 
+    // This method retrieves a node based off of a given string
+    public Node retrieve( String string ) {
+
+        // The following lines compute a sum of the character values of the string.
+        int sum = 0;
+
+        for ( int i = 0 ; i < string.length() ; i ++ ) {
+            sum += ( string.codePointAt( i ) );
+        }
+
+        // The computed sum is then modulo'd by the hash key for the hash value
+        int hash_Value = sum % hash_Key;
+
+        return retrieve( hash_Value );
+
+    }
+
     // This method removes a node from the hash table
     public void remove( int hashValue ) {
 
+        // Check if slot is empty
+        if ( hash_array[hashValue] == null ) {
+            //System.out.print( "Slot is empty" );
+        }
         // If there have not been any node collisons, do a simple removal
-        if (  ! hash_array[hashValue].hasBeenVisited() ) {
+        else if (  ! hash_array[hashValue].hasBeenVisited() ) {
             hash_array[hashValue] = null;
         }
         // Otherwise, put a lazy deletion node in the spot.
         else {
             hash_array[hashValue] = lazyD;
         }
+
+        //System.out.print("Removed " + hashValue);
 
     }
 
